@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  command: sh -c "$(dirname "$(readlink -f "${0}")")/get_param.sh"
+  ubuntu22.04:
+    image: taiting/ws 
+    runtime: nvidia
+    privileged: true
+    network: host
+    ipc: host
+    # command: ['sh', '-c', source "$(dirname "$(readlink -f "${0}")")/get_param.sh"]
+    # -v "${WS_PATH}":/home/"${user}"/work \
+    # -it --name "${CONTAINER}" "${DOCKER_HUB_USER}"/"${IMAGE}"
+    environment:
+      # - NVIDIA_VISIBLE_DEVICES=all
+      - XAUTHORITY=/home/"${user}"/.Xauthority
+      - DISPLAY="${DISPLAY}" 
+      - QT_X11_NO_MITSHM=1
+    volumes: 
+      - /tmp/.Xauthority:/home/"${user}"/.Xauthority
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /dev:/dev
+    name:
+      - "${CONTAINER}" "${DOCKER_HUB_USER}"/"${IMAGE}"
+    command: nvidia-smi
+  # 20.04_cuda12_tf1.15:
+  #   image: taiting/20.04_cuda12_tf1.15
+  #   runtime: nvidia
+  #   privileged: true
+  #   network: host
+  #   ipc: host
+  #   environment:
+  #     # - NVIDIA_VISIBLE_DEVICES=all
+  #     - XAUTHORITY=/home/"${user}"/.Xauthority
+  #     - DISPLAY="${DISPLAY}" 
+  #     - QT_X11_NO_MITSHM=1
+  #   volumes: 
+  #     - /tmp/.Xauthority:/home/"${user}"/.Xauthority
+  #     - /tmp/.X11-unix:/tmp/.X11-unix:rw
+  #     - /etc/timezone:/etc/timezone:ro
+  #     - /etc/localtime:/etc/localtime:ro
+  #     - /dev:/dev
+  #   command: nvidia-smi
+  #   links:
+  #     - ubuntu22.04:22.04
