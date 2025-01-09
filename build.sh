@@ -4,7 +4,7 @@
 source "$(dirname "$(readlink -f "${0}")")/get_param.sh"
 
 # Build docker images
-docker build -t "${DOCKER_HUB_USER}"/"isaac-sim-4.2.0" \
+docker build -t "${DOCKER_HUB_USER}"/"isaac-sim" \
     --build-arg USER="${user}" \
     --build-arg UID="${uid}" \
     --build-arg GROUP="${group}" \
