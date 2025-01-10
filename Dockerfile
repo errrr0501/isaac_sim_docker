@@ -158,6 +158,14 @@ RUN ["/bin/bash", "-c", "source ~/.bashrc"]
 RUN ["/bin/bash", "-c", "/isaac-sim/python.sh -m pip install tomli wheel ninja"]
 RUN ["/bin/bash", "-c", "/isaac-sim/python.sh -m pip install -e .[isaacsim] --no-build-isolation"]
 
+RUN sudo apt update && sudo apt install -y ros-humble-moveit*
+RUN sudo apt install -y ros-humble-ros2-control
+RUN sudo apt install -y ros-humble-ros2-controllers
+RUN sudo apt install -y ninja-build
+# RUN sudo apt install -y ros-humble-control*
+RUN sudo chown -R "${USER}":"${USER}" /isaac-sim*
+
+
 WORKDIR /home/"${USER}"/work
 
 
