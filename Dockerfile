@@ -163,6 +163,7 @@ RUN sudo apt install -y ros-humble-ros2-control
 RUN sudo apt install -y ros-humble-ros2-controllers
 RUN sudo apt install -y ninja-build
 # RUN sudo apt install -y ros-humble-control*
+RUN sudo apt install ros-humble-topic-based-ros2-control
 RUN sudo chown -R "${USER}":"${USER}" /isaac-sim*
 
 
